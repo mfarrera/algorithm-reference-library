@@ -92,7 +92,7 @@ pipeline {
             echo 'FINISHED'
         }
     	failure {
-             mail to: 'team@example.com',
+             mail to: 'mf582@mrao.cam.ac.uk',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL}"
 	     
