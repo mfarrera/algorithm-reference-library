@@ -14,16 +14,16 @@
 pipeline {
     agent any
     environment {
-        LDFLAGS= "$(python3-config --ldflags) -lcfitsio"
+        //LDFLAGS= "$(python3-config --ldflags) -lcfitsio"
 	MPLBACKEND='agg'
-	ARLROOT="$WORKSPACE"
-        DB_ENGINE    = 'sqlite'
+	ARLROOT="${env.WORKSPACE}"
     }
     stages {
         stage('Setup') {
             steps {
 		//echo 'Checking out repository'
 		//checkout scm
+		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Setting up a fresh Python virtual environment...'
 		sh '''
 		virtualenv -p `which python3` _build
@@ -37,8 +37,8 @@ pipeline {
 		echo 'Adding the arl and ffiwrappers path to the virtual environment'
 		echo '(equivalent to setting up PYTHONPATH environment variable'
 		source virtualenvwrapper.sh
-		add2virtualenv $WORKSPACE
-		add2virtualenv $WORKSPACE/ffiwrappers/src
+		add2virtualenv "${env.WORKSPACE}"
+		add2virtualenv "${env.WORKSPACE}/ffiwrappers/src"
 		'''
             }
         }
