@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-// SIP Jenkinsfile (CI/CD pipline)
+// SIP Jenkinsfile (CI/CD pipeline) Declarative sintax
 //
 // https://jenkins.io/doc/book/pipeline/jenkinsfile/
 //
@@ -18,6 +18,7 @@ pipeline {
 	ARLROOT="${env.WORKSPACE}"
     }
     stages {
+// We can skip checkout step if Jenkinsfile is in same repo as the source code (the checkout is configured in Jenkins server, note that we need to enable git-lfs!
 //	stage('Checkout'){
 //	    steps {
 //		echo 'Checking out repository'
@@ -63,8 +64,8 @@ pipeline {
 		source _build/bin/activate
 		export MPLBACKEND=agg
 		pip install pytest pytest-xdist pytest-cov
+		py.test tests -n 4 --verbose --cov=libs --cov=processing_components --cov=workflows --cov-report=html:coverage tests
 		'''
-		//py.test tests -n 4 --verbose --cov=libs --cov=processing_components --cov=workflows --cov-report=html:coverage tests
  		//Make coverage report
 		//coverage html --include=libs/*,processing_components/*,workflows/* -d coverage
             }
@@ -101,6 +102,7 @@ pipeline {
              body: "Something is wrong with ${env.BUILD_URL}"
 	     
     	}
+// We could send slack notifications but pluggin needs to be installed and configured at server
 //	success {
 //        	slackSend channel: '#ops-room',
 //                  color: 'good',
