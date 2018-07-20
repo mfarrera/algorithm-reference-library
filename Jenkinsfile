@@ -101,11 +101,11 @@ pipeline {
              body: "Something is wrong with ${env.BUILD_URL}"
 	     
     	}
-	success {
-        //	slackSend channel: '#ops-room',
-        //          color: 'good',
-        //          message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
-       }
+//	success {
+//        	slackSend channel: '#ops-room',
+//                  color: 'good',
+//                  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+//       }
     }	
 }
 
