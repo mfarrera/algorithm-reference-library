@@ -12,17 +12,22 @@
 
 
 pipeline {
-    agent any
+    agent {label 'sdp-ci-01}
     environment {
         //LDFLAGS= "$(python3-config --ldflags) -lcfitsio"
 	MPLBACKEND='agg'
 	ARLROOT="${env.WORKSPACE}"
     }
     stages {
+	stage('Checkout'){
+	    steps {
+		echo 'Checking out repository'
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'GitLFSPull']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2ca2f96d-f272-46d1-accf-8b64a4a0a48e', url: 'https://github.com/mfarrera/algorithm-reference-library']]])
+		//checkout scm
+	    }
+        }
         stage('Setup') {
             steps {
-		//echo 'Checking out repository'
-		//checkout scm
 		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo 'Setting up a fresh Python virtual environment...'
 		sh '''
