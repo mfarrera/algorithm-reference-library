@@ -14,7 +14,6 @@
 pipeline {
     agent {label 'sdp-ci-01'}
     environment {
-        //LDFLAGS= "$(python3-config --ldflags) -lcfitsio"
 	MPLBACKEND='agg'
 	ARLROOT="${env.WORKSPACE}"
     }
@@ -64,7 +63,7 @@ pipeline {
 		source _build/bin/activate
 		export MPLBACKEND=agg
 		pip install pytest pytest-xdist pytest-cov
-		py.test tests -n 4 --verbose --cov=libs --cov=processing_components --cov=workflows --cov-report=html:coverage tests
+	//	py.test tests -n 4 --verbose --cov=libs --cov=processing_components --cov=workflows --cov-report=html:coverage tests
 		'''
  		//Make coverage report
 		//coverage html --include=libs/*,processing_components/*,workflows/* -d coverage
@@ -75,7 +74,7 @@ pipeline {
                 echo 'Testing ffiwrappers..'
 		sh '''
 		source _build/bin/activate
-		export ARLROOT="${env.WORKSPACE}"
+		export ARLROOT=$WORKSPACE
 		source tests/ffiwrapped/run-tests.sh
 		'''
             }
@@ -103,9 +102,9 @@ pipeline {
 	     
     	}
 	success {
-        	slackSend channel: '#ops-room',
-                  color: 'good',
-                  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+        //	slackSend channel: '#ops-room',
+        //          color: 'good',
+        //          message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
        }
     }	
 }
