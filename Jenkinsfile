@@ -12,7 +12,7 @@
 
 
 pipeline {
-    agent {label 'sdp-ci-01}
+    agent {label 'sdp-ci-01'}
     environment {
         //LDFLAGS= "$(python3-config --ldflags) -lcfitsio"
 	MPLBACKEND='agg'
