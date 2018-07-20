@@ -42,8 +42,8 @@ pipeline {
 		echo 'Adding the arl and ffiwrappers path to the virtual environment'
 		echo '(equivalent to setting up PYTHONPATH environment variable'
 		source virtualenvwrapper.sh
-		add2virtualenv "${env.WORKSPACE}"
-		add2virtualenv "${env.WORKSPACE}/ffiwrappers/src"
+		add2virtualenv $WORKSPACE
+		add2virtualenv $WORKSPACE/ffiwrappers/src
 		'''
             }
         }
