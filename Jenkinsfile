@@ -70,7 +70,7 @@ pipeline {
                 echo 'Testing ffiwrappers..'
 		sh '''
 		source _build/bin/activate
-		export ARLROOT="$WORKSPACE"
+		export ARLROOT="${env.WORKSPACE}"
 		source tests/ffiwrapped/run-tests.sh
 		'''
             }
