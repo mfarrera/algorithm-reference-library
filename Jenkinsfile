@@ -98,10 +98,14 @@ pipeline {
             echo 'FINISHED'
         }
     	failure {
-             mail to: 'mf582@mrao.cam.ac.uk',
+             mail to: 'mf582@mrao.cam.ac.uk, pw410@cam.ac.uk, realtimcornwell@gmail.com',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL}"
-	     
+    	}
+    	fixed {
+             mail to: 'mf582@mrao.cam.ac.uk, pw410@cam.ac.uk, realtimcornwell@gmail.com',
+             subject: "Jenkins build is back to normal: ${currentBuild.fullDisplayName}",
+             body: "See ${env.BUILD_URL}"
     	}
 // We could send slack notifications but pluggin needs to be installed and configured at server
 //	success {
