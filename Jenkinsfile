@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-// SIP Jenkinsfile (CI/CD pipeline) Declarative sintax
+// Jenkinsfile (Declarative pipeline)
 //
 // https://jenkins.io/doc/book/pipeline/jenkinsfile/
 //
@@ -7,6 +7,7 @@
 // - Setup
 // - Build
 // - Test
+// - Deploy
 //
 // Post section: (https://jenkins.io/doc/book/pipeline/syntax/#post)
 
